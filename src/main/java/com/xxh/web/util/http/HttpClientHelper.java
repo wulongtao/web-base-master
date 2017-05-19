@@ -7,7 +7,6 @@ import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -36,21 +35,65 @@ public class HttpClientHelper {
     private static final Logger logger = LoggerFactory.getLogger(HttpClientHelper.class);
     private static ResponseParser responseParser = new JsonResponseParser();
 
+    /**
+     * 以表单形式发送http post请求，Map形式返回响应结果
+     * @param url
+     * @param reqParams
+     * @return
+     */
     public static Map<String, Object> get(String url, Map<String, String> reqParams) {
+        String resp = get2Str(url, reqParams);
+
+        return responseParser.parse(resp);
+    }
+
+    /**
+     * 以表单形式发送http post请求，字符串形式返回响应结果
+     * @param url
+     * @param reqParams
+     * @return
+     */
+    public static String get2Str(String url, Map<String, String> reqParams) {
+        String resp = "";
+
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpResponse response = null;
+
         try {
             URI uri = new URIBuilder()
                     .setPath(url)
+                    .setCharset(Consts.UTF_8)
                     .setParameters(map2NameValuePairs(reqParams))
                     .build();
 
             HttpGet httpGet = new HttpGet(uri);
+            response = httpClient.execute(httpGet);
 
+            //logger
+            logger.info("Do post raw data,status line=" + response.getStatusLine());
+
+
+            HttpEntity entity = response.getEntity();
+            resp = EntityUtils.toString(entity, Consts.UTF_8);
+            EntityUtils.consume(entity);
 
         } catch (URISyntaxException e) {
             e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (response != null) {
+                try {
+                    response.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-        return null;
+        return resp;
     }
 
     /**
@@ -86,7 +129,7 @@ public class HttpClientHelper {
         String resp = "";
 
         StringEntity entityStr = new StringEntity(JSONObject.toJSONString(reqParams), ContentType
-                .create("text/plain", "UTF-8"));
+                .create("text/plain", Consts.UTF_8));
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -113,7 +156,6 @@ public class HttpClientHelper {
                 try {
                     response.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }

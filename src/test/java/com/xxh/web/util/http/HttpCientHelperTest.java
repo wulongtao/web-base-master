@@ -1,5 +1,6 @@
 package com.xxh.web.util.http;
 
+import com.xxh.web.util.format.XmlResponseParser;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -21,7 +22,9 @@ public class HttpCientHelperTest {
         reqParams.put("sessionId", sessionId);
         reqParams.put("source", "");
 
-        Map<String, Object> res = HttpClientHelper.postRawData("http://192.168.100.244:18081/accessService", reqParams);
+//        Map<String, Object> res = HttpClientHelper.postRawData("http://192.168.100.244:18081/accessService", reqParams);
+        Map<String, Object> res = HttpClientHelper.postRawData("http://192.168.100.244:18081/accessService"
+                , reqParams, new XmlResponseParser());
         System.out.println(res);
     }
 }

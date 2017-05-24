@@ -1,6 +1,7 @@
 package com.xxh.web.util.format;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 
 import java.util.*;
@@ -39,15 +40,34 @@ public class JsonResponseParser implements ResponseParser {
         return mRes;
     }
 
-    private List<Map<String, Object>> json2List(Object json) {
+    private List<Object> json2List(Object json) {
         JSONArray arrJson = (JSONArray) json;
 
-        List<Map<String, Object>> lst = new ArrayList<>();
+        List<Object> lst = new ArrayList<>();
         for (int i = 0; i < arrJson.size(); i++) {
-
-            lst.add(parseFromJson(arrJson.getJSONObject(i)));
+            //解决JSON数组中的元素不是JSONObject的情况
+            if (isJSONValid(arrJson.getString(i))) {
+                lst.add(parseFromJson(arrJson.getJSONObject(i)));
+            } else {
+                lst.add(arrJson.getString(i));
+            }
         }
 
         return lst;
+    }
+
+    private boolean isJSONValid(String json) {
+        try {
+            JSONObject.parseObject(json);
+        } catch (JSONException e) {
+            try {
+                JSONArray.parse(json);
+            } catch (Exception ex) {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 }

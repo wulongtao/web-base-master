@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- don't handle the static resource 设置之后controller的请求都访问不了？ -->
+    <!--<mvc:default-servlet-handler />-->
+
+    <!--使用注解包配置-->
+    <context:component-scan base-package="com.xxh.web.controller" />
+    <context:annotation-config />
+    <mvc:annotation-driven />
+
+    <!--Thymeleaf 视图解析器，优先级最高-->
+    <bean id="templateResolver"
+          class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="prefix" value="/WEB-INF/templates/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+        <property name="order" value="#{T(org.springframework.core.Ordered).HIGHEST_PRECEDENCE}" />
+    </bean>
+
+    <bean id="templateEngine"
+          class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver" />
+    </bean>
+
+    <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine" />
+    </bean>
+
+
+    <!--配置默认视图解析器，这里只能解析jsp后缀的页面，不能解析html后缀的页面，优先级最低-->
+    <bean id="viewResolver"
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+
+        <property name="order" value="#{T(org.springframework.core.Ordered).LOWEST_PRECEDENCE}" />
+    </bean>
+
+    <!--静态资源配置-->
+    <!--<mvc:resources location="/WEB-INF/views/html/admin/" mapping="/admin/**"/>-->
+
+</beans>

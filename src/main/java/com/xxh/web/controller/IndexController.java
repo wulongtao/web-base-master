@@ -1,7 +1,7 @@
 package com.xxh.web.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
-    @RequestMapping("/index")
-    public String index() {
-        System.out.println("vvvvv");
+    @RequestMapping("/login")
+    public String index(ModelMap map, String name, String age) {
+        map.addAttribute("host", "http:www....");
+        map.addAttribute("name", name);
+        map.addAttribute("age", age);
         return "index";
     }
+
+
 }

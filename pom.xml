@@ -106,6 +106,14 @@
 			<version>1.9.13</version>
 		</dependency>
 
+		<!--thymeleaf模板放宽语法检查限制，使用LEGACYHTML5代替HTML5模式-->
+		<!-- https://mvnrepository.com/artifact/net.sourceforge.nekohtml/nekohtml -->
+		<dependency>
+			<groupId>net.sourceforge.nekohtml</groupId>
+			<artifactId>nekohtml</artifactId>
+			<version>1.9.21</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

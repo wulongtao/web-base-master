@@ -18,7 +18,7 @@
           class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
         <property name="prefix" value="/WEB-INF/templates/" />
         <property name="suffix" value=".html" />
-        <property name="templateMode" value="HTML5" />
+        <property name="templateMode" value="LEGACYHTML5" />
         <property name="order" value="#{T(org.springframework.core.Ordered).HIGHEST_PRECEDENCE}" />
     </bean>
 
@@ -42,6 +42,6 @@
     </bean>
 
     <!--静态资源配置-->
-    <!--<mvc:resources location="/WEB-INF/views/html/admin/" mapping="/admin/**"/>-->
+    <mvc:resources location="/static/" mapping="/static/**"/>
 
 </beans>

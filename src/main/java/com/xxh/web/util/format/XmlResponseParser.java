@@ -9,6 +9,7 @@ import java.util.*;
 /**
  * Created by wulongtao on 2017/5/19.
  */
+@SuppressWarnings("unchecked")
 public class XmlResponseParser implements ResponseParser {
     Logger logger = LoggerFactory.getLogger(XmlResponseParser.class);
     private final String ATTR_PREFIX = "attr_";

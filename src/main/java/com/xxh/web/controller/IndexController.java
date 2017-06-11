@@ -15,7 +15,7 @@ public class IndexController {
         map.addAttribute("host", "http:www....");
         map.addAttribute("name", name);
         map.addAttribute("age", age);
-        return "index";
+        return "demo/testBasicView";
     }
 
 

@@ -1,6 +1,7 @@
 package com.xxh.web.controller;
 
 import com.xxh.web.vo.DemoVo;
+import com.xxh.web.vo.XmlDemoVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -91,4 +92,10 @@ public class DemoController {
         return mRet;
     }
 
+    @ResponseBody
+    @RequestMapping("/testXml")
+    public XmlDemoVo testXml(@RequestBody XmlDemoVo xmlDemoVo) {
+        xmlDemoVo.setName("名称改");
+        return  xmlDemoVo;
+    }
 }

@@ -10,7 +10,7 @@ import java.net.URI;
 /**
  * Created by wulongtao on 2017/6/7.
  */
-@ClientEndpoint
+@ClientEndpoint(configurator = ClientConfigurator.class)
 public class WebSocketClientEndpoint {
     private Logger logger = LoggerFactory.getLogger(WebSocketClientEndpoint.class);
 
@@ -71,4 +71,5 @@ public class WebSocketClientEndpoint {
         void handleMessage(String message, Session session);
         void handleClose(Session session);
     }
+
 }

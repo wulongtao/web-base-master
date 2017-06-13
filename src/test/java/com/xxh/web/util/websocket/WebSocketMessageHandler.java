@@ -240,6 +240,15 @@ public class WebSocketMessageHandler implements WebSocketClientEndpoint.MessageH
 
 
     public static void sendMessage(Session session, Message message) {
+        session.setMaxTextMessageBufferSize(81920);
+        session.setMaxBinaryMessageBufferSize(81920);
+        session.setMaxIdleTimeout(60000000);
+        /*try {
+            session.getBasicRemote().sendText(new Gson().toJson(message));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
         session.getAsyncRemote().sendText(new Gson().toJson(message));
     }
 

@@ -27,7 +27,7 @@ public class WebSocketMessageHandler implements WebSocketClientEndpoint.MessageH
     public static int curUserId = 10;
 
     static {
-        new Thread(new Runnable() {
+        /*new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
@@ -41,6 +41,7 @@ public class WebSocketMessageHandler implements WebSocketClientEndpoint.MessageH
                     //随机发生事件：（1）会话转移（2）改变在线状态（3）退出登录
                     int randomEvent = (int)(Math.random()*4) + 1;
                     if (randomEvent == 1) {
+                        System.out.println("--会话转移---会话转移------会话转移---会话转移");
                         if (lstServerUser.size() == 0) continue;
                         //随机一个用户
                         String userId = lstServerUser.get((int)(Math.random()*lstServerUser.size()));
@@ -56,8 +57,10 @@ public class WebSocketMessageHandler implements WebSocketClientEndpoint.MessageH
                         request.setUserId(userId);
                         request.setToUserId(toUserId);
                         request.setRoomId(roomId);
+                        System.out.println("会话转移[userId="+userId+",toUserId="+toUserId+",roomId="+roomId+"]");
                         sendMessage(mUser.get(userId), request);
                     } else if (randomEvent == 2) {
+                        System.out.println("--改变在线状态---改变在线状态------改变在线状态---改变在线状态");
                         String userId = lstServerUser.get((int)(Math.random()*lstServerUser.size()));
                         if (mUser.get(userId) == null) continue;
                         Integer oldStatus = mUserOnlineStatus.get(userId);
@@ -73,8 +76,10 @@ public class WebSocketMessageHandler implements WebSocketClientEndpoint.MessageH
                         request.setUserId(userId);
                         request.setExtraData(oldStatus+"");
                         request.setOnlineStatus(newStatus);
+                        System.out.println("改变在线状态[userId="+userId+",oldStatus="+oldStatus+",newStatus="+newStatus+"]");
                         sendMessage(mUser.get(userId), request);
                     } else if (randomEvent == 3) {
+                        System.out.println("--退出登录---退出登录------退出登录---退出登录");
                         String userId = lstServerUser.get((int)(Math.random()*lstServerUser.size()));
                         if (mUser.get(userId) == null) continue;
 
@@ -87,7 +92,7 @@ public class WebSocketMessageHandler implements WebSocketClientEndpoint.MessageH
                 }
 
             }
-        }).start();
+        }).start();*/
 
     }
 
@@ -118,13 +123,16 @@ public class WebSocketMessageHandler implements WebSocketClientEndpoint.MessageH
                 response.setType(ChatConstants.TYPE_WANT_SERVICE_USER);
                 response.setToUserId(msg.getToUserId());
                 response.setUserId(msg.getUserId());
-                if (randomAggree == 1) { //拒绝
+                response.setAbility(msg.getAbility());
+                response.setExtraData("0");
+                /*if (randomAggree == 1) { //拒绝
                     logger.info("拒绝服务");
                     response.setExtraData(msg.getExtraData());
                 } else { //同意
                     logger.info("同意服务");
                     response.setExtraData("0");
-                }
+                }*/
+                System.out.println("【同意服务】");
                 sendMessage(session, response);
                 break;
 
@@ -195,6 +203,8 @@ public class WebSocketMessageHandler implements WebSocketClientEndpoint.MessageH
                         mUserOnlineStatus.put(userId, message.getOnlineStatus());
                     }
                     else if (messageType == 2) lstClientUser.add(userId);
+
+                    System.out.println("【请求服务】");
 
                     //请求服务
                     request = new Message();

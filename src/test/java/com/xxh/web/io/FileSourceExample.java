@@ -22,7 +22,7 @@ public class FileSourceExample {
         WritableResource res1 = new PathResource(filePath);
 
         //2.使用类路径方式加载
-        Resource res2 = new ClassPathResource("com/xxh/web/io/test.txt");
+        Resource res2 = new ClassPathResource("application.properties");
 
         //3.使用WritableResource接口写文件
         OutputStream stream1 = res1.getOutputStream();

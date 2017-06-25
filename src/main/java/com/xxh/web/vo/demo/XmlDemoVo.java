@@ -1,4 +1,4 @@
-package com.xxh.web.vo;
+package com.xxh.web.vo.demo;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -6,8 +6,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Created by raid on 2017/6/12.
+ * 实例XML对象，如果元素是多个单词，那么加上name属性用下划线连接
  */
-@XmlRootElement
+@XmlRootElement(name = "xml-demo-vo")
 public class XmlDemoVo {
     private Integer id;
     private String name;
@@ -35,7 +36,7 @@ public class XmlDemoVo {
         return name;
     }
 
-    @XmlAttribute
+    @XmlElement
     public void setName(String name) {
         this.name = name;
     }
@@ -47,5 +48,14 @@ public class XmlDemoVo {
     @XmlElement
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    @Override
+    public String toString() {
+        return "XmlDemoVo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                '}';
     }
 }

@@ -1,4 +1,4 @@
-package com.xxh.web.vo;
+package com.xxh.web.vo.demo;
 
 import java.io.Serializable;
 

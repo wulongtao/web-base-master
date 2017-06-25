@@ -1,7 +1,9 @@
 package com.xxh.web.controller;
 
-import com.xxh.web.vo.DemoVo;
-import com.xxh.web.vo.XmlDemoVo;
+import com.xxh.web.vo.demo.Animal;
+import com.xxh.web.vo.demo.DemoVo;
+import com.xxh.web.vo.ResVO;
+import com.xxh.web.vo.demo.XmlDemoVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -92,10 +94,34 @@ public class DemoController {
         return mRet;
     }
 
-    @ResponseBody
+
     @RequestMapping("/testXml")
-    public XmlDemoVo testXml(@RequestBody XmlDemoVo xmlDemoVo) {
-        xmlDemoVo.setName("名称改");
+    public @ResponseBody XmlDemoVo testXml() {
+        XmlDemoVo xmlDemoVo = new XmlDemoVo(1, "name", "eee");
         return  xmlDemoVo;
+    }
+
+    @RequestMapping("/testXmlReq")
+    public @ResponseBody Animal testXmlReq(@RequestBody Animal animal) {
+        System.out.println(animal);
+        animal.setName("abc");
+        System.out.println(animal);
+        return  animal;
+    }
+
+    @RequestMapping("/testXmlReq2")
+    public @ResponseBody XmlDemoVo testXmlReq2(@RequestBody XmlDemoVo xmlDemoVo) {
+        System.out.println(xmlDemoVo);
+        xmlDemoVo.setName("abc");
+        System.out.println(xmlDemoVo);
+        return  xmlDemoVo;
+    }
+
+    @ResponseBody
+    @RequestMapping("/testResVO")
+    public ResVO testResVO() {
+        ResVO resVO = new ResVO(1, "test", "test data");
+
+        return resVO;
     }
 }

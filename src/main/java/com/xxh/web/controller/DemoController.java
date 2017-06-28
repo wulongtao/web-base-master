@@ -1,15 +1,15 @@
 package com.xxh.web.controller;
 
-import com.xxh.web.vo.demo.Animal;
-import com.xxh.web.vo.demo.DemoVo;
-import com.xxh.web.vo.ResVO;
-import com.xxh.web.vo.demo.XmlDemoVo;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+        import com.xxh.web.vo.demo.Animal;
+        import com.xxh.web.vo.demo.DemoVo;
+        import com.xxh.web.vo.ResVO;
+        import com.xxh.web.vo.demo.XmlDemoVo;
+        import org.springframework.stereotype.Controller;
+        import org.springframework.ui.ModelMap;
+        import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+        import java.util.HashMap;
+        import java.util.Map;
 
 /**
  * 所有controller的测试方法
@@ -123,5 +123,12 @@ public class DemoController {
         ResVO resVO = new ResVO(1, "test", "test data");
 
         return resVO;
+    }
+
+    @ResponseBody
+    @RequestMapping("testDataConvert1")
+    public DemoVo testDataConvert1(@ModelAttribute DemoVo demoVo) {
+        demoVo.setName("change");
+        return demoVo;
     }
 }

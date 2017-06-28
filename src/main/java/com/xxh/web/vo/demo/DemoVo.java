@@ -1,6 +1,7 @@
 package com.xxh.web.vo.demo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by raid on 2017/6/11.
@@ -8,6 +9,7 @@ import java.io.Serializable;
 public class DemoVo implements Serializable {
     private int id;
     private String name;
+    private Date date;
 
     public DemoVo() {
     }
@@ -31,6 +33,14 @@ public class DemoVo implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @Override

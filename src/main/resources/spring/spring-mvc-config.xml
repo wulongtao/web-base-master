@@ -3,14 +3,25 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+      http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
     <!--使用默认的Servlet来响应静态文件-->
     <mvc:default-servlet-handler />
 
     <!--使用注解包配置-->
+    <!--controller-->
     <context:component-scan base-package="com.xxh.web.controller" />
+    <!--schedule-->
+    <context:component-scan base-package="com.xxh.web.task" />
+
+
     <context:annotation-config />
+    <task:annotation-driven/>
     <mvc:annotation-driven>
         <!--设置不使用默认的消息转换器-->
         <mvc:message-converters register-defaults="false">
@@ -78,5 +89,6 @@
 
     <!--静态资源配置-->
     <!--<mvc:resources location="/static/" mapping="/static/**"/>-->
+
 
 </beans>

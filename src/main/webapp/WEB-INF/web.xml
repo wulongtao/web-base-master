@@ -16,7 +16,8 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:spring/spring-mvc-config.xml</param-value>
         </init-param>
-        <!--<load-on-startup>1</load-on-startup>-->
+        <!--这里一般要设置一下启动立刻加载配置，因为有些定时任务是需要执行的。-->
+        <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>

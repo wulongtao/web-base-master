@@ -4,6 +4,8 @@ package com.xxh.web.controller;
         import com.xxh.web.vo.demo.DemoVo;
         import com.xxh.web.vo.ResVO;
         import com.xxh.web.vo.demo.XmlDemoVo;
+        import org.slf4j.Logger;
+        import org.slf4j.LoggerFactory;
         import org.springframework.stereotype.Controller;
         import org.springframework.ui.ModelMap;
         import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ package com.xxh.web.controller;
 @Controller
 @RequestMapping("/demo")
 public class DemoController {
+    Logger logger = LoggerFactory.getLogger(DemoController.class);
 
     //测试基本的传参，返回视图
     @RequestMapping("/testBasicView")
@@ -33,6 +36,7 @@ public class DemoController {
     @ResponseBody
     @RequestMapping("/testJson")
     public Map<String, Object> testJson(String id) {
+        logger.debug("eeeeeeee");
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> data = new HashMap<>();
         data.put("id", id);

@@ -27,7 +27,10 @@ public class MouseScript {
             public void run() {
                 long time = System.currentTimeMillis();
                 while (true) {
-                    robot.delay(1000);
+
+                    robot.keyPress(KeyEvent.VK_Q);
+
+                   /* robot.delay(1000);
 //                    robot.mouseMove(800, 450);
                     robot.mouseMove(1100, 650);
                     robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
@@ -42,9 +45,9 @@ public class MouseScript {
                     robot.keyPress(KeyEvent.VK_F1);
                     robot.keyRelease(KeyEvent.VK_F1);
 //                    robot.delay(1000);
-                    System.out.println(System.currentTimeMillis() - time);
+                    System.out.println(System.currentTimeMillis() - time);*/
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

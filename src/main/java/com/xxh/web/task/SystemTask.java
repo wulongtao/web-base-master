@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class SystemTask {
     private final Logger logger = LoggerFactory.getLogger(SystemTask.class);
 
-    @Scheduled(cron = "0/5 * *  * * ? ")
+//    @Scheduled(cron = "* * *  * 0/5 ? ")
     public void doSomething() {
         System.out.println("系统任务 ...");
     }

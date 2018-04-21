@@ -1,5 +1,7 @@
 package com.xxh.web.vo;
 
+import com.xxh.web.util.SpringUtil;
+
 /**
  * Created by 小小黑 on 2017/6/25.
  * JSON数据统一使用这个对象包装后返回
@@ -17,13 +19,13 @@ public class ResVO {
 
     public ResVO(Integer result, String message) {
         this.result = result;
-        this.message = message;
+        setMessage(message);
     }
 
     public ResVO(Integer result, String message, Object data) {
         this.result = result;
-        this.message = message;
         this.data = data;
+        setMessage(message);
     }
 
     public Integer getResult() {
@@ -39,7 +41,7 @@ public class ResVO {
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.message = SpringUtil.getMessage(message);
     }
 
     public Object getData() {

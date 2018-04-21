@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+<h2>文件上传</h2>
+<form action="/demo/upload" enctype="multipart/form-data" method="post">
+    <table>
+        <tr>
+            <td>文件描述：</td>
+            <td><input type="text" name="description"></td>
+        </tr>
+        <tr>
+            <td>请选择文件：</td>
+            <td><input type="file" name="file">
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="上传"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
